@@ -8,7 +8,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.post('/submit', (req, res) => {
-  console.log('req ', req)
+  if (req.body) {
+    console.log('Email: ', req.body.email)
+    console.log('Name: ', req.body.name)
+    res.send({ success: true })
+  }
 })
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`))
