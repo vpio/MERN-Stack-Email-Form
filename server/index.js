@@ -43,6 +43,16 @@ app.post('/submit', (req, res) => {
   } else { res.status(400).send('Bad Request') }
 })
 
+app.post('/password', (req, res) => {
+  if (req.body.password === process.env.PASSWORD){
+    console.log('Password approved');
+    res.send({ approved: true });
+  } else {
+    console.log('Incorrect password');
+    res.send({ approved: false });
+  }
+})
+
 app.get('/users/index', (req, res) => {
   User.find((err, user) => res.json({ user: user }))
 })

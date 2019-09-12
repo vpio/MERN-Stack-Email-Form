@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import axios from 'axios';
 import '../styles/home.css';
 
 const PASSWORD = 'password'
@@ -25,7 +26,9 @@ function Home(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    passwordMatch ? props.history.push({ pathname: '/users', approved: true }) : alert('Invalid Password')
+    axios.post('/password', { password }).then(res => {
+      res.data.approved ? props.history.push({ pathname: '/users', approved: true }) : alert('Invalid Password')
+    }).catch(err => console.log('Error: ', err))
   }
 
   useEffect(() => {
