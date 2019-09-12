@@ -11,6 +11,13 @@ var User = mongoose.model('User', userSchema);
 
 mongoose.connect('mongodb+srv://vpio:ZrznvbEcR6HmIf8i@cluster0-zjfia.azure.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'Connection error: '));
+db.once('open', () => {
+    console.log('Successfully connected to MongoDB.');
+});
+
 const app = express();
 const PORT = process.env.port || 3001
 
@@ -25,6 +32,10 @@ app.post('/submit', (req, res) => {
   } else {
     res.send({ success: false })
   }
+})
+
+app.get('/users/index', (req, res) => {
+  User.find((err, user) => res.json({ user: user }))
 })
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`))
