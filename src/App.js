@@ -1,14 +1,20 @@
 import React from 'react';
-import EmailForm from './components/EmailForm.js';
-import Thanks from './components/Thanks.js';
-import { BrowserRouter, Route} from "react-router-dom";
+import Routes from './components/Routes';
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+
+
 
 function App() {
   return (
-    <BrowserRouter>
-      <Route path="/" exact component={EmailForm} />
-      <Route path="/thankyou" exact component={Thanks} />
-    </BrowserRouter>
+    <div>
+      <Navbar bg="dark" variant="dark">
+        <Nav className='ml-auto'>
+          <Nav.Link href="#home">View Entries</Nav.Link>
+        </Nav>
+      </Navbar >
+      <Routes />
+    </div>
   );
 }
 
