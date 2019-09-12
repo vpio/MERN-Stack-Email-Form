@@ -1,13 +1,13 @@
 import React from 'react';
-import EmailForm from './EmailForm.js';
-import Thanks from './Thanks.js';
-import Users from './Users.js';
+import Home from './Home';
+import Thanks from './Thanks';
+import Users from './Users';
 import { BrowserRouter, Route} from "react-router-dom";
 
 function Routes() {
   return (
     <BrowserRouter>
-      <Route path="/" exact component={EmailForm} />
+      <Route path="/" exact component={Home} />
       <Route path="/thankyou" exact component={Thanks} />
       <Route path="/users" exact component={Users} />
     </BrowserRouter>
