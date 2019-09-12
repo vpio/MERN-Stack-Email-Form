@@ -19,7 +19,7 @@ function EmailForm(props) {
   }
 
   return (
-    <Container>
+    <Container className='mt-5'>
       <Form>
         <Form.Group>
           <Form.Label>Email address</Form.Label>
