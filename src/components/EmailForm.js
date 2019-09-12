@@ -14,7 +14,8 @@ function EmailForm(props) {
     e.preventDefault();
     axios.post('/submit', {
       email,
-      name
+      name,
+      persistent
     }).then((res) => {
       res.data.success ? props.history.push('/thankyou') : console.log('ERROR!')
     })

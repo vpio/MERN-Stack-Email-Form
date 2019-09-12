@@ -25,13 +25,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.post('/submit', (req, res) => {
-  if (req.body.email !== '' && req.body.name !== '') {
-    console.log(`Saving ${req.body.name}'s info'`)
-    new User({ name: req.body.name, email: req.body.email}).save();
-    res.send({ success: true })
-  } else {
-    res.send({ success: false })
-  }
+  if (req.body.email !== '' && req.body.name !== '' && req.body.persistent) {
+    console.log(`Saving ${req.body.name}'s info to MongoDB...`)
+    new User({ name: req.body.name, email: req.body.email}).save((err, user) => {
+      if (err) {
+        res.status(400).send('Error: ' + err);
+        return
+      }
+      console.log(user.name + " saved to User collection.");
+    });
+    res.sendStatus(200)
+  } else if (req.body.email !== '' && req.body.name !== '' && !req.body.persistent){
+    console.log(`Pretending to save ${req.body.name}'s info...`)
+    res.sendStatus(200)
+    console.log(`Saved!`)
+  } else { res.status(400).send('Bad Request') }
 })
 
 app.get('/users/index', (req, res) => {
