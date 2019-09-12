@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config();
 
 var userSchema = new mongoose.Schema({
   name: String,
@@ -9,7 +11,7 @@ var userSchema = new mongoose.Schema({
 
 var User = mongoose.model('User', userSchema);
 
-mongoose.connect('mongodb+srv://vpio:ZrznvbEcR6HmIf8i@cluster0-zjfia.azure.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(`mongodb+srv://vpio:${process.env.MONGOPASS}.azure.mongodb.net/test?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true});
 
 var db = mongoose.connection;
 
