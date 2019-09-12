@@ -31,7 +31,7 @@ function Users(props) {
         </Navbar >
         <ListGroup>
           {
-            (users.length > 0) ? users.map((user, i) => <ListGroup.Item key={`user ${i + 1}`}>{user.name}</ListGroup.Item>) : <h1>Loading...</h1>
+            (users.length > 0) ? users.map((user, i) => <ListGroup.Item key={`user ${i + 1}`}>{user.name} | {user.email}</ListGroup.Item>) : <h1>Loading...</h1>
           }
         </ListGroup>
       </div>
