@@ -10,7 +10,12 @@ function EmailForm(props) {
   const [persistent, setPersistent] = useState(false)
 
   const handleSubmit = () => {
-    props.history.push('/thankyou')
+    axios.post('/submit', {
+      email,
+      name
+    }).then((res) => {
+      res.data.success ? props.history.push('/thankyou') : console.log('ERROR!')
+    })
   }
 
   return (
