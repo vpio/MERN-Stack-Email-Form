@@ -14,7 +14,6 @@ function Home(props) {
 
   const [modalShow, setModalShow] = useState(false)
   const [password, setPassword] = useState('')
-  const [passwordMatch, setPasswordMatch] = useState(false)
 
   const handleClick = () => {
     setModalShow(!modalShow)
@@ -30,11 +29,6 @@ function Home(props) {
       res.data.approved ? props.history.push({ pathname: '/users', approved: true }) : alert('Invalid Password')
     }).catch(err => console.log('Error: ', err))
   }
-
-  useEffect(() => {
-    (password === PASSWORD) ? setPasswordMatch(true) : setPasswordMatch(false)
-  }, [password])
-
 
   return (
     <div>
@@ -65,7 +59,6 @@ function Home(props) {
                 autoComplete='off'
                 onChange={handleChange}
                 value={password}
-                isValid={passwordMatch}
                 required
           />
         </Modal.Body>

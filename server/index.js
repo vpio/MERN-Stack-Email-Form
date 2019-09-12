@@ -11,7 +11,7 @@ var userSchema = new mongoose.Schema({
 
 var User = mongoose.model('User', userSchema);
 
-mongoose.connect(`mongodb+srv://vpio:${process.env.MONGOPASS}.azure.mongodb.net/test?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(`mongodb+srv://vpio:${process.env.MONGOPASS}@cluster0-zjfia.azure.mongodb.net/test?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true});
 
 var db = mongoose.connection;
 

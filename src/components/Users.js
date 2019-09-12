@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Button from 'react-bootstrap/Button';
+import NotFound from './NotFound';
 import axios from 'axios';
 
 function Users(props) {
@@ -19,17 +20,7 @@ function Users(props) {
   }, []);
 
   if (!props.location.approved) {
-    return (
-      <Jumbotron style={{'height': '100vh'}}>
-        <h1>404</h1>
-        <p>
-          Uh oh! We can't seem to find the page you're looking for.
-        </p>
-        <p>
-          <Button variant="primary" onClick={() => props.history.push('/')}>Go Back</Button>
-        </p>
-      </Jumbotron>
-    )
+    return <NotFound history={props.history}/>
   } else {
     return (
       <div>

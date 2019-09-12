@@ -22,7 +22,7 @@ function EmailForm(props) {
         name,
         persistent
       }).then((res) => {
-        res.status === 200 ? props.history.push('/thankyou') : setSubmitInProgress(false)
+        res.status === 200 ? props.history.push({ pathname: '/thankyou', name}) : setSubmitInProgress(false)
       })
     }
     setValidated(true);
