@@ -1,8 +1,19 @@
 import React from 'react';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+import Button from 'react-bootstrap/Button';
 
-function Thanks() {
+function Thanks(props) {
   return (
-    <h1>Thanks</h1>
+    <Jumbotron style={{'height': '100vh'}}>
+      <h1>Thank You!</h1>
+      <p>
+        Thanks for sending your info. Your cooperation and insight helps improve our team daily.
+      </p>
+      <p>
+        <Button variant="primary" onClick={() => props.history.push('/')}>Go Back</Button>
+      </p>
+    </Jumbotron>
+
   )
 }
 

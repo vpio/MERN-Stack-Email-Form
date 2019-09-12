@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Spinner from 'react-bootstrap/Spinner';
+import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 
 function EmailForm(props) {
@@ -9,18 +11,23 @@ function EmailForm(props) {
   const [name, setName] = useState('')
   const [persistent, setPersistent] = useState(false)
   const [validated, setValidated] = useState(false);
+  const [submitInProgress, setSubmitInProgress] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/submit', {
-      email,
-      name,
-      persistent
-    }).then((res) => {
-      res.data.success ? props.history.push('/thankyou') : console.log('ERROR!')
-    })
+    if (email.includes('@') && name !== '' ){
+      setSubmitInProgress(true)
+      axios.post('/submit', {
+        email,
+        name,
+        persistent
+      }).then((res) => {
+        res.status === 200 ? props.history.push('/thankyou') : setSubmitInProgress(false)
+      })
+    }
     setValidated(true);
   }
+
 
   return (
     <Container className='mt-5'>
@@ -59,9 +66,22 @@ function EmailForm(props) {
                     value={persistent}
           />
         </Form.Group>
-        <Button type='submit' variant="primary" onClick={handleSubmit}>
-          Submit
-        </Button>
+        {
+          !submitInProgress ?
+          <Button type='submit' variant="primary" onClick={handleSubmit}>
+            Submit
+          </Button> :
+          <Button variant="primary" disabled>
+            <Spinner
+              as="span"
+              animation="grow"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+            Loading...
+          </Button>
+        }
       </Form>
     </Container>
   )

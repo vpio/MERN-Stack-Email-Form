@@ -29,6 +29,7 @@ app.post('/submit', (req, res) => {
     console.log(`Saving ${req.body.name}'s info to MongoDB...`)
     new User({ name: req.body.name, email: req.body.email}).save((err, user) => {
       if (err) {
+        console.log('Failed to save: ' + err)
         res.status(400).send('Error: ' + err);
         return
       }
