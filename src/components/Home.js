@@ -8,8 +8,6 @@ import Nav from 'react-bootstrap/Nav';
 import axios from 'axios';
 import '../styles/home.css';
 
-const PASSWORD = 'password'
-
 function Home(props) {
 
   const [modalShow, setModalShow] = useState(false)
