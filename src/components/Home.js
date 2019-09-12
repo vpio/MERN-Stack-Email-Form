@@ -23,8 +23,9 @@ function Home(props) {
     setPassword(e.target.value)
   }
 
-  const handleSubmit = () => {
-    passwordMatch ? props.history.push('/users') : console.log('no')
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    passwordMatch ? props.history.push({ pathname: '/users', approved: true }) : alert('Invalid Password')
   }
 
   useEffect(() => {
@@ -35,6 +36,7 @@ function Home(props) {
   return (
     <div>
       <Navbar bg="dark" variant="dark">
+        <Navbar.Brand href="http://piomolina.com">Pio Molina</Navbar.Brand>
         <Nav className='ml-auto'>
           <Nav.Link onClick={handleClick}>View Entries</Nav.Link>
         </Nav>
@@ -48,6 +50,7 @@ function Home(props) {
           aria-labelledby="contained-modal-title-vcenter"
           centered
       >
+      <Form>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             Enter Password
@@ -60,11 +63,13 @@ function Home(props) {
                 onChange={handleChange}
                 value={password}
                 isValid={passwordMatch}
+                required
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleSubmit}>Submit</Button>
+          <Button type='submit' onClick={handleSubmit}>Submit</Button>
         </Modal.Footer>
+        </Form>
       </Modal>
     </div>
   )
